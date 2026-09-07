@@ -1,37 +1,10 @@
-# Maven build
-target/
-
-# Java
-*.class
-*.jar
-*.war
-*.ear
-
-# Eclipse / STS
-.settings/
-.project
-.classpath
-.factorypath
-.metadata/
-
-# IntelliJ IDEA
-.idea/
-*.iml
-
-# VS Code
-.vscode/
-
-# Cấu hình bí mật
-.env
-.env.local
-.env.development.local
-.env.production.local
-secrets.properties
-application-local.properties
-
-# Hệ điều hành
-.DS_Store
-Thumbs.db
-
-# Logs
+/target/
+/.local/
+/.runtime/
+/.recovery/
+/.idea/
 *.log
+.classpath
+.project
+.settings/
+application-local.properties

@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/common :: head('Thống kê tổng số lượng')}"></head>
+<body class="admin-page">
+<div th:replace="~{fragments/common :: header}"></div>
+<main id="main" class="container admin-layout">
+    <aside th:replace="~{fragments/common :: adminSidebar}"></aside>
+    <div class="admin-content">
+        <div class="page-heading">
+            <div>
+                <span class="eyebrow">SỐ LƯỢNG HÀNG HÓA</span>
+                <h1>Thống kê tổng số lượng</h1>
+            </div>
+            <a th:href="@{/admin/statistics}" class="button secondary">↻ Làm mới</a>
+        </div>
+        <div class="stats-grid">
+            <div class="stat-card featured">
+                <span>Tổng số loại sản phẩm</span>
+                <strong id="total-products" th:text="${quantities.productCount}">0</strong>
+                <small>Các mẫu hàng đang hiển thị</small>
+            </div>
+            <div class="stat-card">
+                <span>Tổng số lượng tồn kho</span>
+                <strong id="total-stock" th:text="${quantities.totalStock}">0</strong>
+                <small>Tổng số đơn vị hàng còn lại</small>
+            </div>
+            <div class="stat-card">
+                <span>Tổng số danh mục</span>
+                <strong th:text="${categories.size()}">0</strong>
+                <small>Danh mục hàng hóa hiện có</small>
+            </div>
+            <div class="stat-card">
+                <span>Sản phẩm đã hết hàng</span>
+                <strong th:text="${quantities.outOfStock}">0</strong>
+                <small th:text="${quantities.lowStock} + ' mẫu còn từ 1–10 đơn vị'">0 mẫu sắp hết hàng</small>
+            </div>
+        </div>
+        <section class="panel">
+            <div class="section-heading">
+                <h2>Số lượng theo danh mục</h2>
+                <a th:href="@{/admin/categories}" class="text-link">Quản lý danh mục →</a>
+            </div>
+            <p class="hint">Số loại sản phẩm là số mẫu hàng. Tổng tồn kho là số lượng cộng lại của các mẫu hàng đang hiển thị.</p>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                    <tr><th>Danh mục</th><th>Số loại sản phẩm</th><th>Tổng tồn kho</th><th></th></tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="category : ${categories}">
+                        <td><strong th:text="${category.name}"></strong></td>
+                        <td th:text="${category.productCount}"></td>
+                        <td th:text="${category.stock}"></td>
+                        <td><a class="text-link" th:href="@{/products(category=${category.id})}">Xem sản phẩm →</a></td>
+                    </tr>
+                    <tr th:if="${categories.isEmpty()}"><td colspan="4">Chưa có danh mục hàng hóa.</td></tr>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td><strong>Tổng cộng</strong></td>
+                        <td><strong th:text="${quantities.productCount}"></strong></td>
+                        <td><strong th:text="${quantities.totalStock}"></strong></td>
+                        <td></td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <p class="hint mt">Số liệu lấy trực tiếp từ SQL Server mỗi lần mở hoặc làm mới trang. Sản phẩm đã ẩn không được tính vào số lượng đang bán.</p>
+        </section>
+    </div>
+</main>
+</body>
+</html>
