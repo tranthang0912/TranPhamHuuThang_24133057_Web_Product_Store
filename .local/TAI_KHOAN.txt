@@ -1,0 +1,2 @@
+Tai khoan quan tri: admin
+Mat khau: admin
